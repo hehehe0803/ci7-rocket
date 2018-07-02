@@ -42,6 +42,12 @@ public class GameWindow extends JFrame {
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
                     gameCanvas.player.angle -= 5.0;
                 }
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    BulletPlayer bulletPlayer = new BulletPlayer();
+                    bulletPlayer.position.set(gameCanvas.player.position);
+                    bulletPlayer.velocity.set(gameCanvas.player.velocity.copy().multiply(1.5f));
+                    ((PlayerAttack)gameCanvas.player.attack).bulletPlayers.add(bulletPlayer);
+                }
 
                 gameCanvas.player.velocity.set(
                         (new Vector2D(3.5f, 0.0f)).rotate(gameCanvas.player.angle)

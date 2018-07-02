@@ -7,6 +7,8 @@ public class EnemySpecial implements Attack {
 
     private Random random;
 
+    private int speed;
+
     public List<BulletEnemy> bulletEnemies;
     private int count;
 
@@ -14,17 +16,18 @@ public class EnemySpecial implements Attack {
         random = new Random();
         this.bulletEnemies = new ArrayList<>( );
         this.count = 0;
+        this.speed = random.nextInt(3) + 1;
     }
 
     @Override
     public void run(GameObject enemy) {
-        enemy.position.add(new Vector2D(-4,0));
-        if (this.count == 30) {
-            for (double angle = 0.0; angle < 360.0; angle += 360.0 / 10.0) {
+        enemy.position.add(new Vector2D(speed,0));
+        if (this.count == 50) {
+            for (double angle = 0.0; angle < 360.0; angle += 360.0 / 10) {
                 BulletEnemy bulletEnemy = new BulletEnemy();
                 bulletEnemy.position.set(enemy.position);
                 bulletEnemy.velocity.set(
-                        (new Vector2D(3.0f, 0.0f)).rotate(angle)
+                        (new Vector2D(3.0f, 0.0f)).rotate(angle).add(new Vector2D(speed,0))
                 );
                 this.bulletEnemies.add(bulletEnemy);
             }

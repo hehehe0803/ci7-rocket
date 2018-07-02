@@ -14,17 +14,13 @@ public class PlayerAttack implements Attack{
 
     @Override
     public void run(GameObject player) {
-        if (this.count == 30) {
-            BulletPlayer bulletPlayer = new BulletPlayer();
-            bulletPlayer.position.set(((Player)player).position);
-            bulletPlayer.velocity.set(((Player)player).velocity.copy().multiply(1.5f));
-            this.bulletPlayers.add(bulletPlayer);
-            this.count = 0;
-        } else {
-            this.count += 1;
-        }
         this.bulletPlayers.forEach(bulletPlayer ->  bulletPlayer.run());
-
+        bulletPlayers.removeIf(bulletPlayer ->
+                    bulletPlayer.position.x < 0
+                ||  bulletPlayer.position.x > 1024
+                ||  bulletPlayer.position.y < 0
+                ||  bulletPlayer.position.y > 600
+        );
     }
 
     @Override

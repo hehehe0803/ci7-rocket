@@ -42,6 +42,6 @@ public class Player extends GameObject {
     @Override
     public void render(Graphics graphics) {
         super.render(graphics);
-        ((PlayerAttack)this.attack).render(graphics);
+        this.attack.render(graphics);
     }
 }
