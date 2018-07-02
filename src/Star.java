@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class Star extends GameObject {
 
     public Vector2D velocity;
@@ -12,5 +14,10 @@ public class Star extends GameObject {
         super.run();
         this.position.addUp(this.velocity);
 
+    }
+
+    @Override
+    public void render(Graphics graphics) {
+        super.render(graphics);
     }
 }
