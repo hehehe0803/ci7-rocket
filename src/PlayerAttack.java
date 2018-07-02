@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerAttack implements Attack,Renderer{
+public class PlayerAttack implements Attack{
 
     public List<BulletPlayer> bulletPlayers;
     private int count = 0;
@@ -28,7 +28,7 @@ public class PlayerAttack implements Attack,Renderer{
     }
 
     @Override
-    public void render(Graphics graphics, Vector2D position) {
+    public void render(Graphics graphics) {
         this.bulletPlayers.forEach(bulletPlayer -> bulletPlayer.render(graphics));
     }
 }

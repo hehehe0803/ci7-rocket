@@ -15,7 +15,7 @@ public class EnemyFollow implements Attack {
 
     @Override
     public void run(GameObject enemy) {
-        enemy.position.addUp(((Enemy)enemy).velocity);
+        enemy.position.add(((Enemy)enemy).velocity);
         if (this.count == 30) {
             BulletEnemy bulletEnemy = new BulletEnemy( );
             bulletEnemy.position.set(((Enemy)enemy).position);

@@ -12,7 +12,7 @@ public class Star extends GameObject {
     @Override
     public void run() {
         super.run();
-        this.position.addUp(this.velocity);
+        this.position.add(this.velocity);
 
     }
 

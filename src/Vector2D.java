@@ -24,22 +24,22 @@ public class Vector2D {
         return this.set(vector2D.x, vector2D.y);
     }
 
-    public Vector2D addUp(float x, float y) {
+    public Vector2D add(float x, float y) {
         this.x += x;
         this.y += y;
         return this;
     }
 
-    public Vector2D addUp(Vector2D vector2D) {
-        return this.addUp(vector2D.x, vector2D.y);
+    public Vector2D add(Vector2D vector2D) {
+        return this.add(vector2D.x, vector2D.y);
     }
 
-    public Vector2D add(float x, float y) {
+    public Vector2D addNew(float x, float y) {
         return new Vector2D(this.x + x, this.y + y);
     }
 
-    public Vector2D add(Vector2D vector2D) {
-        return this.add(vector2D.x, vector2D.y);
+    public Vector2D addNew(Vector2D vector2D) {
+        return this.addNew(vector2D.x, vector2D.y);
     }
 
     public Vector2D subtractBy(float x, float y) {

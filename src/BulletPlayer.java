@@ -13,7 +13,7 @@ public class BulletPlayer {
     }
 
     public void run() {
-        this.position.addUp(this.velocity);
+        this.position.add(this.velocity);
     }
 
     public void render(Graphics graphics) {

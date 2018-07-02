@@ -23,7 +23,7 @@ public class Player extends GameObject {
     @Override
     public void run() {
         super.run();
-        this.position.addUp(this.velocity);
+        this.position.add(this.velocity);
         ((PolygonRenderer) this.renderer).angle = this.angle;
         this.attack.run(this);
         this.backtoScreen();
@@ -42,6 +42,6 @@ public class Player extends GameObject {
     @Override
     public void render(Graphics graphics) {
         super.render(graphics);
-        ((PlayerAttack)this.attack).render(graphics,this.position);
+        ((PlayerAttack)this.attack).render(graphics);
     }
 }

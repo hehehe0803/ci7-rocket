@@ -18,7 +18,7 @@ public class EnemySpecial implements Attack {
 
     @Override
     public void run(GameObject enemy) {
-        enemy.position.addUp(new Vector2D(-4,0));
+        enemy.position.add(new Vector2D(-4,0));
         if (this.count == 30) {
             for (double angle = 0.0; angle < 360.0; angle += 360.0 / 10.0) {
                 BulletEnemy bulletEnemy = new BulletEnemy();
@@ -45,8 +45,9 @@ public class EnemySpecial implements Attack {
 
         if (enemy.position.y > 600) enemy.position.set(this.random.nextInt(1024), 0);
     }
-    
-    public void render(Graphics graphics, Vector2D position) {
+
+    @Override
+    public void render(Graphics graphics) {
         this.bulletEnemies.forEach(bulletEnemy -> bulletEnemy.render(graphics));
     }
 }
