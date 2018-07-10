@@ -1,35 +1,23 @@
-import javax.imageio.ImageIO;
+import base.GameObject;
+import base.GameObjectManager;
+import game.background.Background;
+import game.enemy.Enemy;
+import game.powerup.CreatePowerUp;
+import game.star.CreateStar;
+import game.player.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class GameCanvas extends JPanel {
 
     BufferedImage backBuffered;
     Graphics graphics;
 
-    Background background;
-
-    private CreateStar createStar;
-
-    public Player player;
-    public Enemy enemy1;
-    public Enemy enemy2;
-
-    private Random random = new Random();
-
+    public Player player = new Player();
 
     public GameCanvas() {
-
-        player = new Player();
-        enemy1 = new Enemy(new EnemyFollow());
-        enemy2 = new Enemy(new EnemySpecial());
-        createStar = new CreateStar();
 
         this.setSize(1024, 600);
 
@@ -46,18 +34,18 @@ public class GameCanvas extends JPanel {
     }
 
     private void setupCharacter() {
-        this.background = new Background();
+        GameObjectManager.instance.add(new Background());
+        GameObjectManager.instance.add(new CreateStar());
+        GameObjectManager.instance.add(new Enemy());
+        GameObjectManager.instance.add(new CreatePowerUp());
         this.setupPlayer();
-        this.setupEnemy();
+
     }
 
     private void setupPlayer() {
-        this.player.position.set(100, 200);
-    }
-
-    private void setupEnemy() {
-        this.enemy1.position.set(800, 400);
-        this.enemy2.position.set(200,50);
+        Player player = new Player();
+        player.position.set(100, 200);
+        GameObjectManager.instance.add(player);
     }
 
     @Override
@@ -66,38 +54,20 @@ public class GameCanvas extends JPanel {
     }
 
     public void renderAll() {
-        this.background.render(this.graphics);
-
-        this.player.render(this.graphics);
-        this.enemy1.render(this.graphics);
-        this.enemy2.render(this.graphics);
-        this.createStar.render(this.graphics);
-
+        GameObjectManager.instance.renderAll(this.graphics);
         this.repaint();
     }
 
     public void runAll() {
-        this.createStar.create();
-        this.createStar.run();
-        this.runEnemy();
-        this.enemy2.run();
-        this.player.run();
+        GameObjectManager.instance.runAll();
     }
 
-    public void runEnemy(){
-        Vector2D velocity = player.position
-                .subtract(this.enemy1.position)
-                .normalize()
-                .multiply(1.5f);
-        this.enemy1.velocity.set(velocity);
-        this.enemy1.run();
-    }
-
-    private BufferedImage loadImage(String path) {
-        try {
-            return ImageIO.read(new File(path));
-        } catch (IOException e) {
-            return null;
-        }
+    private void runEnemy() {
+//        base.Vector2D velocity = this.player.position
+//                .subtract(this.enemy.position)
+//                .normalize()
+//                .multiply(1.5f);
+//        this.enemy.velocity.set(velocity);
+//        this.enemy.run();
     }
 }

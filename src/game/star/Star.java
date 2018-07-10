@@ -1,4 +1,8 @@
-import java.awt.*;
+package game.star;
+
+import base.GameObject;
+import base.Vector2D;
+import renderer.ImageRenderer;
 
 public class Star extends GameObject {
 
@@ -13,11 +17,5 @@ public class Star extends GameObject {
     public void run() {
         super.run();
         this.position.add(this.velocity);
-
-    }
-
-    @Override
-    public void render(Graphics graphics) {
-        super.render(graphics);
     }
 }
