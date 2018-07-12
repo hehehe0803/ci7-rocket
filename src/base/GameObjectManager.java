@@ -1,10 +1,12 @@
 package base;
 
+import game.enemy.BulletEnemy;
 import game.enemy.Enemy;
 import game.player.BulletPlayer;
 import game.player.Player;
 import game.powerup.PowerUp;
 import physic.BoxCollider;
+import physic.PhysicBody;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -50,28 +52,17 @@ public class GameObjectManager {
                 .orElse(null);
     }
 
-    public Enemy checkCollision(BulletPlayer bulletPlayer) {
-        return (Enemy) this.list
+    public <T extends GameObject & PhysicBody> T checkCollision(BoxCollider boxCollider, Class<T> cls) {
+        return (T) this.list
                 .stream( )
                 .filter(gameObject -> gameObject.isAlive)
-                .filter(gameObject -> gameObject instanceof Enemy)
+                .filter(gameObject -> cls.isInstance(gameObject))
                 .filter(gameObject -> {
-                    BoxCollider other = ((Enemy) gameObject).boxCollider;
-                    return bulletPlayer.boxCollider.checkCollision(other);
+                    BoxCollider other = ((T) gameObject).getBoxCollider( );
+                    return boxCollider.checkCollision(other);
                 })
                 .findFirst( )
                 .orElse(null);
     }
-    public PowerUp checkCollisionPowerUp(Player player){
-        return (PowerUp) this.list
-                .stream()
-                .filter(gameObject -> gameObject.isAlive)
-                .filter(gameObject -> gameObject instanceof PowerUp)
-                .filter(gameObject -> {
-                    BoxCollider other = ((PowerUp) gameObject).boxCollider;
-                    return player.boxCollider.checkCollision(other);
-                })
-                .findFirst()
-                .orElse(null);
-    }
+
 }

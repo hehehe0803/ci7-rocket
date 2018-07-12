@@ -3,26 +3,31 @@ package game.enemy;
 import base.GameObject;
 import base.GameObjectManager;
 import base.Vector2D;
+import game.player.BulletPlayer;
 import game.player.Player;
 import physic.BoxCollider;
+import physic.PhysicBody;
+import physic.RunHitObject;
 import renderer.ImageRenderer;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Enemy extends GameObject {
+public class Enemy extends GameObject implements PhysicBody {
 
     public Vector2D velocity;
     private List<BulletEnemy> bulletEnemies;
     private int count = 0;
     public BoxCollider boxCollider;
+    private RunHitObject runHitObject;
 
     public Enemy() {
         this.velocity = new Vector2D( );
         this.bulletEnemies = new ArrayList<>( );
         this.renderer = new ImageRenderer("resources/images/circle.png", 20, 20);
         this.boxCollider = new BoxCollider(20, 20);
+        this.runHitObject = new RunHitObject(BulletPlayer.class);
     }
 
     @Override
@@ -50,6 +55,7 @@ public class Enemy extends GameObject {
                     .normalize( )
                     .multiply(1.5f);
             this.velocity.set(velocity);
+            this.runHitObject.run(this);
         }
         this.position.add(this.velocity);
         this.boxCollider.position.set(this.position.x - 10, this.position.y - 10);
@@ -61,5 +67,19 @@ public class Enemy extends GameObject {
     public void render(Graphics graphics) {
         super.render(graphics);
         this.bulletEnemies.forEach(bulletEnemy -> bulletEnemy.render(graphics));
+    }
+
+    public void getHit() {
+        this.isAlive = false;
+    }
+
+    @Override
+    public BoxCollider getBoxCollider() {
+        return this.boxCollider;
+    }
+
+    @Override
+    public void getHit(GameObject gameObject) {
+        this.isAlive = false;
     }
 }

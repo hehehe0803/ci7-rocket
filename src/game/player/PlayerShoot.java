@@ -1,15 +1,13 @@
 package game.player;
 
-import base.FrameCounter;
 import base.GameObjectAttributes;
 import base.GameObjectManager;
 import input.KeyboardInput;
 
-import java.awt.event.KeyEvent;
-
 public class PlayerShoot implements GameObjectAttributes<Player> {
 
     public int tripleShotCounter = 0;
+    public ShootState shootState;
 
     public PlayerShoot() {
     }
@@ -22,6 +20,21 @@ public class PlayerShoot implements GameObjectAttributes<Player> {
     }
 
     public void shoot(Player gameObject){
+//        switch (this.shootState) {
+//            case SINGLE:
+//                BulletPlayer bulletPlayer = new BulletPlayer();
+//                bulletPlayer.position.set(gameObject.position);
+//                bulletPlayer.velocity.set(gameObject.velocity.copy().multiply(1.5f));
+//                GameObjectManager.instance.add(bulletPlayer);
+//                break;
+//            case TRIPLE:
+//                for (double angle = -30; angle <= 30; angle += 30) {
+//                    BulletPlayer bulletPlayer = new game.player.BulletPlayer();
+//                    bulletPlayer.position.set(gameObject.position);
+//                    bulletPlayer.velocity.set(
+//                            gameObject.velocity.copy().multiply(2.2f).rotate(angle).add(gameObject.velocity)
+//                    );
+//                    GameObjectManager.instance.add(bulletPlayer);
         if (tripleShotCounter == 0) {
             BulletPlayer bulletPlayer = new BulletPlayer();
             bulletPlayer.position.set(gameObject.position);

@@ -27,4 +27,12 @@ public class GameObject {
             this.renderer.render(graphics, this.position);
         }
     }
+    /*public <T extends GameObject> t recycle(Class<T> cls){
+        GameObjectManager.instance.stream()
+            .filter
+            .firstInstance
+            .reset
+        cls.newInstance()
+
+     */
 }
